@@ -19,8 +19,9 @@ Known Issues
 This project uses a BlinkM or MiniM module to read a temp sensor (analog) and use that to control the RGB LED on the module
 The BlinkM/MiniM modules have an ATTiny85 (MiniM) or ATTiny44 (BlinkM).  While these processors do have PWM, the pins on the RGB
 are not tied to the hardware PWM outputs except for Blue.  Therefore, a software based PWM was needed.  The software PWM that I am
-using (see note below on original Author) does a pretty good job, but does have some limitiations.  The values that I choose was picked
-to produce as smooth of a result I could get while keeping the functionaility consistent.
+using (see note below on original Author) does a pretty good job, but does have some limitiations.  This is mainly due to the fact 
+that the ATTiny processors only have 1 timer.  The values that I choose was picked to produce as smooth of a result I could get while 
+keeping the functionaility consistent.
 
 Programming this requires a programmer as the BlinkM or MiniM do not have an arduino comptabible bootloader (or a HW serial port for that matter).  
 For this reason you will need an ISP.  Fortunatly you can use an Arduino as an ISP.  Instructions for programming the BlinkM and MiniM can be 
@@ -41,7 +42,7 @@ All credit goes to him for the handy routine
 */
 
 // BlinkM / BlinkM MinM pins
-const int redPin = A3;  // 
+const int redPin = 3;  // 
 const int grnPin = 4;  //
 const int bluPin = 1;  // PWM, will blink when programming
 const int sdaPin = 0;  // PWM, 'd' pin, can be digital I/O

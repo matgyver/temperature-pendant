@@ -1,8 +1,10 @@
-update=10/21/2013 12:09:55 AM
-last_client=kicad
+update=10/26/2013 10:55:48 AM
+last_client=eeschema
+[general]
+version=1
 [eeschema]
 version=1
-LibDir=
+LibDir=../../KiCadLib
 NetFmtName=
 RptD_X=0
 RptD_Y=100
@@ -39,6 +41,4 @@ LibName27=opto
 LibName28=atmel
 LibName29=contrib
 LibName30=valves
-LibName31=Y:/GitHub/KiCadLib/Aerodyne_v2
-[general]
-version=1
+LibName31=Aerodyne_v2
