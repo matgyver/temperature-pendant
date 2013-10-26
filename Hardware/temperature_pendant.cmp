@@ -1,0 +1,38 @@
+Cmp-Mod V01 Created by CvPcb (2013-07-07 BZR 4022)-stable date = 10/26/2013 2:14:01 PM
+
+BeginCmp
+TimeStamp = /5264A202;
+Reference = BT1;
+ValeurCmp = BATTERY;
+IdModule  = CONN-JST-XH-2;
+EndCmp
+
+BeginCmp
+TimeStamp = /5265F63E;
+Reference = J1;
+ValeurCmp = CONN-6;
+IdModule  = HDRV6W38P254_6X1;
+EndCmp
+
+BeginCmp
+TimeStamp = /5264B70C;
+Reference = SW1;
+ValeurCmp = SW-MOM;
+IdModule  = SW_FSM4JSMATR;
+EndCmp
+
+BeginCmp
+TimeStamp = /5265EB43;
+Reference = U1;
+ValeurCmp = BLINKM/MINM;
+IdModule  = BlinkM;
+EndCmp
+
+BeginCmp
+TimeStamp = /5264B6FD;
+Reference = U2;
+ValeurCmp = TMP3X;
+IdModule  = TO92;
+EndCmp
+
+EndListe
