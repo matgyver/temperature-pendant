@@ -1,0 +1,209 @@
+
+(session temperature_pendant.ses
+  (base_design temperature_pendant.dsn)
+  (placement
+    (resolution um 10)
+    (component TO92
+      (place U2 2222500 -1460500 front 0)
+    )
+    (component HDRV6W38P254_6X1
+      (place J1 2082800 -1295400 front 0)
+    )
+    (component "CONN-JST-XH-2"
+      (place BT1 2209800 -1193800 front 0)
+    )
+    (component BlinkM
+      (place U1 2082800 -1409700 front 0)
+    )
+    (component "SW-EVQP7"
+      (place SW1 2209800 -1346200 front 0)
+    )
+  )
+  (was_is
+  )
+  (routes 
+    (resolution um 10)
+    (parser
+      (host_cad "KiCad's Pcbnew")
+      (host_version "(2013-07-07 BZR 4022)-stable")
+    )
+    (library_out 
+      (padstack "Via[0-1]_889:635_um"
+        (shape
+          (circle F.Cu 8890 0 0)
+        )
+        (shape
+          (circle B.Cu 8890 0 0)
+        )
+        (attach off)
+      )
+      (padstack "Via[0-1]_889:0_um"
+        (shape
+          (circle F.Cu 8890 0 0)
+        )
+        (shape
+          (circle B.Cu 8890 0 0)
+        )
+        (attach off)
+      )
+    )
+    (network_out 
+      (net +BATT
+        (wire
+          (path F.Cu 2540
+            2159500 -1384800
+            2069600 -1474700
+          )
+        )
+        (wire
+          (path F.Cu 2540
+            2191800 -1363905
+            2180395 -1363905
+            2159500 -1384800
+          )
+        )
+        (wire
+          (path F.Cu 2540
+            2159500 -1384800
+            2070100 -1295400
+          )
+        )
+        (wire
+          (path F.Cu 2540
+            2225570 -1365297
+            2193192 -1365297
+            2191800 -1363905
+          )
+        )
+        (wire
+          (path F.Cu 2540
+            2191800 -1363905
+            2191800 -1362513
+          )
+        )
+        (wire
+          (path F.Cu 2540
+            2235200 -1447800
+            2235200 -1437002
+          )
+        )
+        (wire
+          (path F.Cu 2540
+            2225570 -1365297
+            2225570 -1427372
+            2235200 -1437002
+          )
+        )
+        (wire
+          (path F.Cu 2540
+            2227800 -1362513
+            2225570 -1364743
+            2225570 -1365297
+          )
+        )
+        (wire
+          (path F.Cu 2540
+            2191800 -1353450
+            2191800 -1362513
+          )
+        )
+        (wire
+          (path F.Cu 2540
+            2227800 -1357981
+            2238614 -1347167
+            2238614 -1327114
+            2197300 -1285800
+          )
+        )
+        (wire
+          (path F.Cu 2540
+            2227800 -1357981
+            2227800 -1362513
+          )
+        )
+        (wire
+          (path F.Cu 2540
+            2227800 -1353450
+            2227800 -1357981
+          )
+        )
+      )
+      (net MISO
+        (wire
+          (path B.Cu 2540
+            2145800 -1474700
+            2146300 -1474200
+            2146300 -1295400
+          )
+        )
+      )
+      (net RST
+        (wire
+          (path B.Cu 2540
+            2018800 -1474700
+            2019300 -1474200
+            2019300 -1295400
+          )
+        )
+      )
+      (net SW
+        (wire
+          (path B.Cu 2540
+            2094800 -1474700
+            2095300 -1474200
+            2095300 -1295400
+          )
+        )
+        (wire
+          (path F.Cu 2540
+            2191800 -1334418
+            2134318 -1334418
+            2095300 -1295400
+          )
+        )
+        (wire
+          (path F.Cu 2540
+            2191800 -1334418
+            2191800 -1329887
+          )
+        )
+        (wire
+          (path F.Cu 2540
+            2191800 -1338950
+            2191800 -1334418
+          )
+        )
+        (wire
+          (path F.Cu 2540
+            2227800 -1338950
+            2227800 -1329887
+          )
+        )
+        (wire
+          (path F.Cu 2540
+            2191800 -1329887
+            2194446 -1327241
+            2225154 -1327241
+            2227800 -1329887
+          )
+        )
+      )
+      (net TEMP
+        (wire
+          (path B.Cu 2540
+            2120800 -1295400
+            2120300 -1295900
+            2120300 -1474700
+          )
+        )
+        (wire
+          (path F.Cu 2540
+            2120300 -1474700
+            2147200 -1447800
+            2209800 -1447800
+          )
+        )
+      )
+    )
+  )
+)

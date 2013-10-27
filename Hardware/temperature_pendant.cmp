@@ -1,4 +1,4 @@
-Cmp-Mod V01 Created by CvPcb (2013-07-07 BZR 4022)-stable date = 10/26/2013 2:14:01 PM
+Cmp-Mod V01 Created by CvPcb (2013-07-07 BZR 4022)-stable date = 10/27/2013 1:41:32 PM
 
 BeginCmp
 TimeStamp = /5264A202;
@@ -18,7 +18,7 @@ BeginCmp
 TimeStamp = /5264B70C;
 Reference = SW1;
 ValeurCmp = SW-MOM;
-IdModule  = SW_FSM4JSMATR;
+IdModule  = SW-EVQP7;
 EndCmp
 
 BeginCmp

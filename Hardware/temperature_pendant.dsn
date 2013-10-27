@@ -1,0 +1,185 @@
+(pcb "C:\Users\matgyver\Documents\GitHub\temperature-pendant\Hardware\temperature_pendant.dsn"
+  (parser
+    (string_quote ")
+    (space_in_quoted_tokens on)
+    (host_cad "KiCad's Pcbnew")
+    (host_version "(2013-07-07 BZR 4022)-stable")
+  )
+  (resolution um 10)
+  (unit um)
+  (structure
+    (layer F.Cu
+      (type signal)
+      (property
+        (index 0)
+      )
+    )
+    (layer B.Cu
+      (type signal)
+      (property
+        (index 1)
+      )
+    )
+    (boundary
+      (path pcb 0  199390 -127000  199390 -151130  226060 -151130  226060 -127000
+            199390 -127000)
+    )
+    (plane GND (polygon B.Cu 0  200660 -128270  224790 -128270  224790 -149860  200660 -149860))
+    (via "Via[0-1]_889:635_um" "Via[0-1]_889:0_um")
+    (rule
+      (width 254)
+      (clearance 254.1)
+      (clearance 254.1 (type default_smd))
+      (clearance 63.5 (type smd_smd))
+    )
+  )
+  (placement
+    (component TO92
+      (place U2 222250 -146050 front 0 (PN TMP3X))
+    )
+    (component HDRV6W38P254_6X1
+      (place J1 208280 -129540 front 0 (PN "CONN-6"))
+    )
+    (component "CONN-JST-XH-2"
+      (place BT1 220980 -119380 front 0 (PN BATTERY))
+    )
+    (component BlinkM
+      (place U1 208280 -140970 front 0 (PN BLINKM/MINM))
+    )
+    (component "SW-EVQP7"
+      (place SW1 220980 -134620 front 0 (PN "SW-MOM"))
+    )
+  )
+  (library
+    (image TO92
+      (outline (path signal 304.8  -1270 -2540  2540 1270))
+      (outline (path signal 304.8  2540 1270  2540 2540))
+      (outline (path signal 304.8  2540 2540  1270 3810))
+      (outline (path signal 304.8  1270 3810  -1270 3810))
+      (outline (path signal 304.8  -1270 3810  -3810 1270))
+      (outline (path signal 304.8  -3810 1270  -3810 -1270))
+      (outline (path signal 304.8  -3810 -1270  -2540 -2540))
+      (outline (path signal 304.8  -2540 -2540  -1270 -2540))
+      (pin Rect[A]Pad_1397x1397_um 1 1270 1270)
+      (pin Round[A]Pad_1397_um 2 -1270 1270)
+      (pin Round[A]Pad_1397_um 3 -1270 -1270)
+    )
+    (image HDRV6W38P254_6X1
+      (outline (path signal 381  -7620 -1270  7620 -1270))
+      (outline (path signal 381  7620 1270  -7620 1270))
+      (outline (path signal 381  -7620 1270  -7620 -1270))
+      (outline (path signal 381  7620 -1270  7620 1270))
+      (pin Round[A]Pad_1905_um 1 -6350 0)
+      (pin Round[A]Pad_1905_um 2 -3810 0)
+      (pin Round[A]Pad_1905_um 3 -1270 0)
+      (pin Round[A]Pad_1905_um 4 1250 0)
+      (pin Round[A]Pad_1905_um 5 3800 0)
+      (pin Round[A]Pad_1905_um 6 6350 0)
+    )
+    (image "CONN-JST-XH-2"
+      (outline (path signal 150  -3750 0  -3750 -11500))
+      (outline (path signal 150  -3750 -11500  3750 -11500))
+      (outline (path signal 150  3750 -11500  3750 0))
+      (pin Round[A]Pad_1300_um 1 -1250 -9200)
+      (pin Round[A]Pad_1300_um 2 1250 -9200)
+    )
+    (image BlinkM
+      (outline (path signal 150  2804.01 50  2666.78 -816.488  2268.49 -1598.16  1648.16 -2218.49
+            866.488 -2616.78  0 -2754.01  -866.488 -2616.78  -1648.16 -2218.49
+            -2268.49 -1598.16  -2666.78 -816.488  -2804.01 50  -2666.78 916.488
+            -2268.49 1698.16  -1648.16 2318.49  -866.488 2716.78  0 2854.01
+            866.488 2716.78  1648.16 2318.49  2268.49 1698.16  2666.78 916.488))
+      (outline (path signal 150  -7650 7850  7600 7850))
+      (outline (path signal 150  7600 7850  7600 -7850))
+      (outline (path signal 150  7600 -7850  -7650 -7850))
+      (outline (path signal 150  -7650 -7850  -7650 7850))
+      (pin Round[A]Pad_1905_um 1 -6400 -6500)
+      (pin Round[A]Pad_1905_um 2 -3860 -6500)
+      (pin Round[A]Pad_1905_um 3 -1320 -6500)
+      (pin Round[A]Pad_1905_um 4 1200 -6500)
+      (pin Round[A]Pad_1905_um 5 3750 -6500)
+      (pin Round[A]Pad_1905_um 6 6300 -6500)
+    )
+    (image "SW-EVQP7"
+      (outline (path signal 150  -2750 -1000  -2750 1500))
+      (outline (path signal 150  -2750 1500  2750 1500))
+      (outline (path signal 150  2750 1500  2750 -1000))
+      (pin Rect[T]Pad_1400x1050_um 1 1800 725)
+      (pin Rect[T]Pad_1400x1050_um 1@1 -1800 725)
+      (pin Rect[T]Pad_1400x1050_um 2 -1800 -725)
+      (pin Rect[T]Pad_1400x1050_um 2@1 1800 -725)
+      (pin Round[A]Pad_1200_um @1 0 900)
+      (pin Round[A]Pad_1200_um @2 0 -900)
+    )
+    (padstack Round[A]Pad_1200_um
+      (shape (circle F.Cu 1200))
+      (shape (circle B.Cu 1200))
+      (attach off)
+    )
+    (padstack Round[A]Pad_1300_um
+      (shape (circle F.Cu 1300))
+      (shape (circle B.Cu 1300))
+      (attach off)
+    )
+    (padstack Round[A]Pad_1397_um
+      (shape (circle F.Cu 1397))
+      (shape (circle B.Cu 1397))
+      (attach off)
+    )
+    (padstack Round[A]Pad_1905_um
+      (shape (circle F.Cu 1905))
+      (shape (circle B.Cu 1905))
+      (attach off)
+    )
+    (padstack Rect[A]Pad_1397x1397_um
+      (shape (rect F.Cu -698.5 -698.5 698.5 698.5))
+      (shape (rect B.Cu -698.5 -698.5 698.5 698.5))
+      (attach off)
+    )
+    (padstack Rect[T]Pad_1400x1050_um
+      (shape (rect F.Cu -700 -525 700 525))
+      (attach off)
+    )
+    (padstack "Via[0-1]_889:635_um"
+      (shape (circle F.Cu 889))
+      (shape (circle B.Cu 889))
+      (attach off)
+    )
+    (padstack "Via[0-1]_889:0_um"
+      (shape (circle F.Cu 889))
+      (shape (circle B.Cu 889))
+      (attach off)
+    )
+  )
+  (network
+    (net +BATT
+      (pins U2-1 J1-3 BT1-1 U1-3 SW1-2 SW1-2@1)
+    )
+    (net GND
+      (pins U2-3 J1-2 BT1-2 U1-2)
+    )
+    (net MISO
+      (pins J1-6 U1-6)
+    )
+    (net RST
+      (pins J1-1 U1-1)
+    )
+    (net SW
+      (pins J1-4 U1-4 SW1-1 SW1-1@1)
+    )
+    (net TEMP
+      (pins U2-2 J1-5 U1-5)
+    )
+    (class kicad_default "" +BATT GND MISO RST SW TEMP
+      (circuit
+        (use_via Via[0-1]_889:635_um)
+      )
+      (rule
+        (width 254)
+        (clearance 254.1)
+      )
+    )
+  )
+  (wiring
+  )
+)
