@@ -48,11 +48,11 @@ const int bluPin = 1;  // PWM, will blink when programming
 const int sdaPin = 0;  // PWM, 'd' pin, can be digital I/O
 const int sclPin = 2;  // A/D, 'c' pin, can be digital I/O, or analog input
 
-#define VOLTAGE_SCALE 4.96 // not quite 5
-#define fadeSpeed 30   //Defines how fast we fade in the SoftPWM routine
+#define VOLTAGE_SCALE 4.96       // not quite 5
+#define fadeSpeed 30             //Defines how fast we fade in the SoftPWM routine
 
-int SW_Pin = sdaPin; //Digital in pin for reading switch
-const int tmp36_Pin  = A1;   //Analog in pin for TMP36 temp sensor and A1 because Arduino is stupid
+int SW_Pin = sdaPin;             //Digital in pin for reading switch
+const int tmp36_Pin  = A1;       //Analog in pin for TMP36 temp sensor and A1 because Arduino is stupid
 const int numReadings = 50;
 
 int temperature = 0;
@@ -66,6 +66,7 @@ int average = 0;
 
 int r,g,b = 0;
 
+//  Setup routine, configures our pins and initializes a few things
 void setup() 
 {
   pinMode(redPin, OUTPUT);
@@ -76,19 +77,22 @@ void setup()
   for (int thisReading = 0; thisReading < numReadings; thisReading++)
     readings[thisReading] = 0;   
 
+// Configures the Switch and TMP36 sensor pins
   pinMode(SW_Pin, INPUT);
   //digitalWrite(SW_Pin, LOW);
   pinMode(tmp36_Pin, INPUT);
   
-  digitalWrite(grnPin, HIGH);     // do a little "hello there" intro
+//  This is a short "Hello" to show we have initialized and setup everything
+
+  digitalWrite(grnPin, HIGH);     
   delay(250);
   digitalWrite(grnPin, LOW);
   delay(250);
-  digitalWrite(bluPin, HIGH);     // do a little "hello there" intro
+  digitalWrite(bluPin, HIGH);     
   delay(250);
   digitalWrite(bluPin, LOW);
   delay(250);
-  digitalWrite(redPin, HIGH);     // do a little "hello there" intro
+  digitalWrite(redPin, HIGH);     
   delay(250);
   digitalWrite(redPin, LOW);
   delay(250);
@@ -96,6 +100,8 @@ void setup()
   digitalWrite(bluPin, LOW);
   digitalWrite(grnPin, LOW);
 }
+
+//  Main Loop
 
 void loop() 
 {
