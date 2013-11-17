@@ -5,10 +5,10 @@
     (no_connects 0)
     (area 199.339999 118.876 226.559 151.180001)
     (thickness 1.6)
-    (drawings 6)
+    (drawings 10)
     (tracks 36)
     (zones 0)
-    (modules 5)
+    (modules 6)
     (nets 7)
   )
 
@@ -305,6 +305,24 @@
     )
   )
 
+  (module MECH-HOLE220 (layer F.Cu) (tedit 5228D98A) (tstamp 5279E137)
+    (at 213.36 125.73)
+    (fp_text reference MECH-HOLE220 (at 0 0) (layer F.SilkS) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (fp_text value VAL** (at 0 0) (layer F.SilkS) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (fp_circle (center 0 0) (end 2.5 0) (layer F.SilkS) (width 0.15))
+    (pad "" thru_hole circle (at 0 0) (size 2.8 2.8) (drill 2.2)
+      (layers *.Cu *.Mask F.SilkS)
+    )
+  )
+
+  (gr_line (start 199.39 123.19) (end 199.39 124.46) (angle 90) (layer Edge.Cuts) (width 0.1))
+  (gr_line (start 226.06 123.19) (end 226.06 124.46) (angle 90) (layer Edge.Cuts) (width 0.1))
+  (gr_line (start 199.39 124.46) (end 199.39 127) (angle 90) (layer Edge.Cuts) (width 0.1))
+  (gr_line (start 226.06 127) (end 226.06 124.46) (angle 90) (layer Edge.Cuts) (width 0.1))
   (gr_text "Matthew Nelson\n2013" (at 219.71 137.16) (layer F.SilkS)
     (effects (font (size 1 1) (thickness 0.25)))
   )
@@ -314,7 +332,7 @@
   (gr_line (start 199.39 151.13) (end 199.39 127) (angle 90) (layer Edge.Cuts) (width 0.1))
   (gr_line (start 226.06 151.13) (end 199.39 151.13) (angle 90) (layer Edge.Cuts) (width 0.1))
   (gr_line (start 226.06 127) (end 226.06 151.13) (angle 90) (layer Edge.Cuts) (width 0.1))
-  (gr_line (start 199.39 127) (end 226.06 127) (angle 90) (layer Edge.Cuts) (width 0.1))
+  (gr_line (start 199.39 123.19) (end 226.06 123.19) (angle 90) (layer Edge.Cuts) (width 0.1))
 
   (segment (start 222.78 135.345) (end 222.78 135.7981) (width 0.254) (layer F.Cu) (net 1))
   (segment (start 222.78 135.7981) (end 222.78 136.2513) (width 0.254) (layer F.Cu) (net 1))
