@@ -1,4 +1,4 @@
-Cmp-Mod V01 Created by CvPcb (2013-07-07 BZR 4022)-stable date = 11/4/2013 11:17:03 PM
+Cmp-Mod V01 Created by CvPcb (2013-07-07 BZR 4022)-stable date = 11/17/2013 9:35:30 PM
 
 BeginCmp
 TimeStamp = /5264A202;
@@ -11,7 +11,7 @@ BeginCmp
 TimeStamp = /5265F63E;
 Reference = J1;
 ValeurCmp = CONN-6;
-IdModule  = HDRV6W38P254_6X1;
+IdModule  = HDRV6W38P254_6X1-LOCK;
 EndCmp
 
 BeginCmp
@@ -32,7 +32,7 @@ BeginCmp
 TimeStamp = /5264B6FD;
 Reference = U2;
 ValeurCmp = TMP3X;
-IdModule  = TO92;
+IdModule  = TO92-INVERT;
 EndCmp
 
 EndListe

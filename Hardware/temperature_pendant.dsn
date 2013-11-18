@@ -21,10 +21,10 @@
       )
     )
     (boundary
-      (path pcb 0  224790 -130810  199390 -130810  199390 -151130  224790 -151130
-            224790 -130810)
+      (path pcb 0  199400 -127200  220000 -127200  220000 -149000  199400 -149000
+            199400 -127200)
     )
-    (plane GND (polygon B.Cu 0  200660 -132080  222250 -132080  222250 -149860  200660 -149860))
+    (plane GND (polygon B.Cu 0  199900 -133800  219800 -133800  219800 -148800  199900 -148800))
     (via "Via[0-1]_889:635_um" "Via[0-1]_889:0_um")
     (rule
       (width 254)
@@ -34,66 +34,26 @@
     )
   )
   (placement
-    (component TO92
-      (place U2 218440 -146050 front 0 (PN TMP3X))
-    )
-    (component HDRV6W38P254_6X1
-      (place J1 208280 -134620 front 0 (PN "CONN-6"))
-    )
-    (component "CONN-JST-XH-2"
-      (place BT1 219710 -124460 front 0 (PN BATTERY))
-    )
-    (component "SW-EVQP7"
-      (place SW1 217170 -138430 front 0 (PN "SW-MOM"))
-    )
     (component MinM
       (place U1 207010 -142240 front 0 (PN BLINKM/MINM))
     )
+    (component "SW-EVQP7"
+      (place SW1 218100 -139000 front 90 (PN "SW-MOM"))
+    )
+    (component "CONN-JST-XH-2"
+      (place BT1 207000 -130000 back 0 (PN BATTERY))
+    )
+    (component "HDRV6W38P254_6X1-LOCK"
+      (place J1 206250 -135000 front 0 (PN "CONN-6"))
+    )
+    (component "TO92-INVERT"
+      (place U2 217250 -146250 front 0 (PN TMP3X))
+    )
+    (component "MECH-HOLE220"
+      (place "MECH-HOLE220" 210000 -129800 front 0 (PN VAL**))
+    )
   )
   (library
-    (image TO92
-      (outline (path signal 304.8  -1270 -2540  2540 1270))
-      (outline (path signal 304.8  2540 1270  2540 2540))
-      (outline (path signal 304.8  2540 2540  1270 3810))
-      (outline (path signal 304.8  1270 3810  -1270 3810))
-      (outline (path signal 304.8  -1270 3810  -3810 1270))
-      (outline (path signal 304.8  -3810 1270  -3810 -1270))
-      (outline (path signal 304.8  -3810 -1270  -2540 -2540))
-      (outline (path signal 304.8  -2540 -2540  -1270 -2540))
-      (pin Rect[A]Pad_1397x1397_um 1 1270 1270)
-      (pin Round[A]Pad_1397_um 2 -1270 1270)
-      (pin Round[A]Pad_1397_um 3 -1270 -1270)
-    )
-    (image HDRV6W38P254_6X1
-      (outline (path signal 381  -7620 -1270  7620 -1270))
-      (outline (path signal 381  7620 1270  -7620 1270))
-      (outline (path signal 381  -7620 1270  -7620 -1270))
-      (outline (path signal 381  7620 -1270  7620 1270))
-      (pin Round[A]Pad_1905_um 1 -6350 0)
-      (pin Round[A]Pad_1905_um 2 -3810 0)
-      (pin Round[A]Pad_1905_um 3 -1270 0)
-      (pin Round[A]Pad_1905_um 4 1250 0)
-      (pin Round[A]Pad_1905_um 5 3800 0)
-      (pin Round[A]Pad_1905_um 6 6350 0)
-    )
-    (image "CONN-JST-XH-2"
-      (outline (path signal 150  -3750 0  -3750 -11500))
-      (outline (path signal 150  -3750 -11500  3750 -11500))
-      (outline (path signal 150  3750 -11500  3750 0))
-      (pin Round[A]Pad_1300_um 1 -1250 -9200)
-      (pin Round[A]Pad_1300_um 2 1250 -9200)
-    )
-    (image "SW-EVQP7"
-      (outline (path signal 150  -2750 -1000  -2750 1500))
-      (outline (path signal 150  -2750 1500  2750 1500))
-      (outline (path signal 150  2750 1500  2750 -1000))
-      (pin Rect[T]Pad_1400x1050_um 1 1800 725)
-      (pin Rect[T]Pad_1400x1050_um 1@1 -1800 725)
-      (pin Rect[T]Pad_1400x1050_um 2 -1800 -725)
-      (pin Rect[T]Pad_1400x1050_um 2@1 1800 -725)
-      (pin Round[A]Pad_1200_um @1 0 900)
-      (pin Round[A]Pad_1200_um @2 0 -900)
-    )
     (image MinM
       (outline (path signal 150  5700 5300  5700 -6250))
       (outline (path signal 150  -5700 5300  -5700 -6250))
@@ -110,6 +70,60 @@
       (pin Round[A]Pad_1905_um 4 1250 -4850)
       (pin Round[A]Pad_1905_um 5 3800 -4850)
       (pin Round[A]Pad_1905_um 6 3800 3800)
+    )
+    (image "SW-EVQP7"
+      (outline (path signal 150  -2750 -1000  -2750 1500))
+      (outline (path signal 150  -2750 1500  2750 1500))
+      (outline (path signal 150  2750 1500  2750 -1000))
+      (pin Rect[T]Pad_1400x1050_um 1 1800 725)
+      (pin Rect[T]Pad_1400x1050_um 1@1 -1800 725)
+      (pin Rect[T]Pad_1400x1050_um 2 -1800 -725)
+      (pin Rect[T]Pad_1400x1050_um 2@1 1800 -725)
+      (pin Round[A]Pad_1200_um @1 0 900)
+      (pin Round[A]Pad_1200_um @2 0 -900)
+    )
+    (image "CONN-JST-XH-2"
+      (outline (path signal 150  -3750 0  -3750 -11500))
+      (outline (path signal 150  -3750 -11500  3750 -11500))
+      (outline (path signal 150  3750 -11500  3750 0))
+      (pin Round[A]Pad_1300_um 1 -1250 -9200)
+      (pin Round[A]Pad_1300_um 2 1250 -9200)
+    )
+    (image "HDRV6W38P254_6X1-LOCK"
+      (outline (path signal 381  6350 -1270  9050 -1270))
+      (outline (path signal 381  6350 1270  9050 1270))
+      (outline (path signal 381  -3810 1270  -3810 -1270))
+      (outline (path signal 381  -6350 1270  -6350 -1270))
+      (outline (path signal 381  -6350 -1270  6350 -1270))
+      (outline (path signal 381  9050 -1270  9050 1270))
+      (outline (path signal 381  6350 1270  -6350 1270))
+      (pin Rect[A]Pad_1905x1905_um 1 -5080 -127)
+      (pin Round[A]Pad_1905_um 2 -2540 127)
+      (pin Round[A]Pad_1905_um 3 0 -127)
+      (pin Round[A]Pad_1905_um 4 2540 127)
+      (pin Round[A]Pad_1905_um 5 5080 -127)
+      (pin Round[A]Pad_1905_um 6 7600 150)
+    )
+    (image "TO92-INVERT"
+      (outline (path signal 304.8  -1270 -2540  2540 1270))
+      (outline (path signal 304.8  2540 1270  2540 2540))
+      (outline (path signal 304.8  2540 2540  1270 3810))
+      (outline (path signal 304.8  1270 3810  -1270 3810))
+      (outline (path signal 304.8  -1270 3810  -3810 1270))
+      (outline (path signal 304.8  -3810 1270  -3810 -1270))
+      (outline (path signal 304.8  -3810 -1270  -2540 -2540))
+      (outline (path signal 304.8  -2540 -2540  -1270 -2540))
+      (pin Rect[A]Pad_1397x1397_um 1 -1270 -1270)
+      (pin Round[A]Pad_1397_um 2 -1270 1270)
+      (pin Round[A]Pad_1397_um 3 1270 1270)
+    )
+    (image "MECH-HOLE220"
+      (outline (path signal 150  2500 0  2377.64 -772.542  2022.54 -1469.46  1469.46 -2022.54
+            772.542 -2377.64  0 -2500  -772.542 -2377.64  -1469.46 -2022.54
+            -2022.54 -1469.46  -2377.64 -772.542  -2500 0  -2377.64 772.542
+            -2022.54 1469.46  -1469.46 2022.54  -772.542 2377.64  0 2500
+            772.542 2377.64  1469.46 2022.54  2022.54 1469.46  2377.64 772.542))
+      (pin Round[A]Pad_2800_um @1 0 0)
     )
     (padstack Round[A]Pad_1200_um
       (shape (circle F.Cu 1200))
@@ -131,6 +145,11 @@
       (shape (circle B.Cu 1905))
       (attach off)
     )
+    (padstack Round[A]Pad_2800_um
+      (shape (circle F.Cu 2800))
+      (shape (circle B.Cu 2800))
+      (attach off)
+    )
     (padstack Rect[A]Pad_1397x1397_um
       (shape (rect F.Cu -698.5 -698.5 698.5 698.5))
       (shape (rect B.Cu -698.5 -698.5 698.5 698.5))
@@ -138,6 +157,11 @@
     )
     (padstack Rect[T]Pad_1400x1050_um
       (shape (rect F.Cu -700 -525 700 525))
+      (attach off)
+    )
+    (padstack Rect[A]Pad_1905x1905_um
+      (shape (rect F.Cu -952.5 -952.5 952.5 952.5))
+      (shape (rect B.Cu -952.5 -952.5 952.5 952.5))
       (attach off)
     )
     (padstack "Via[0-1]_889:635_um"
@@ -153,22 +177,22 @@
   )
   (network
     (net +BATT
-      (pins U2-1 J1-3 BT1-1 SW1-2 SW1-2@1 U1-3)
+      (pins U1-3 SW1-2 SW1-2@1 BT1-1 J1-3 U2-1)
     )
     (net GND
-      (pins U2-3 J1-2 BT1-2 U1-2)
+      (pins U1-2 BT1-2 J1-2 U2-3)
     )
     (net MISO
-      (pins J1-6 U1-6)
+      (pins U1-6 J1-6)
     )
     (net RST
-      (pins J1-1 U1-1)
+      (pins U1-1 J1-1)
     )
     (net SW
-      (pins J1-4 SW1-1 SW1-1@1 U1-4)
+      (pins U1-4 SW1-1 SW1-1@1 J1-4)
     )
     (net TEMP
-      (pins U2-2 J1-5 U1-5)
+      (pins U1-5 J1-5 U2-2)
     )
     (class kicad_default "" +BATT GND MISO RST SW TEMP
       (circuit
