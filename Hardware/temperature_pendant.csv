@@ -1,0 +1,6 @@
+Ref,Value,Qty,Vendor,Part #
+BT1,BATTERY,1,Digikey,455-2257-ND
+J1,CONN-6,~,~,
+SW1,SW-MOM,1,Digikey,P12280SCT-ND
+U1,MinM,1,Sparkfun,DEV-09904
+U2,TMP3X,1,Digikey,TMP36GT9Z-ND
