@@ -41,6 +41,8 @@ http://arduino.cc/forum/index.php/topic,75334.0.html
 All credit goes to him for the handy routine
 */
 
+
+#include "PinChangeInterrupt.h"
 // BlinkM / BlinkM MinM pins
 const int redPin = 3;  // 
 const int grnPin = 4;  //
@@ -49,11 +51,11 @@ const int sdaPin = 0;  // PWM, 'd' pin, can be digital I/O
 const int sclPin = 2;  // A/D, 'c' pin, can be digital I/O, or analog input
 
 #define VOLTAGE_SCALE 4.96       // not quite 5
-#define fadeSpeed 30             //Defines how fast we fade in the SoftPWM routine
+#define fadeSpeed 15             //Defines how fast we fade in the SoftPWM routine
 
 int SW_Pin = sdaPin;             //Digital in pin for reading switch
 const int tmp36_Pin  = A1;       //Analog in pin for TMP36 temp sensor and A1 because Arduino is stupid
-const int numReadings = 50;
+const int numReadings = 10;      //Number of readings to take to average out the values
 
 int temperature = 0;
 int SW_Status;
@@ -82,7 +84,11 @@ void setup()
   //digitalWrite(SW_Pin, LOW);
   pinMode(tmp36_Pin, INPUT);
   
+//Setup interrupt for switching modes
+  attachPcInterrupt(0,SWITCH_ISR,FALLING);
+  
 //  This is a short "Hello" to show we have initialized and setup everything
+// This will blink each color once to make sure the RGB LED is functioning
 
   digitalWrite(grnPin, HIGH);     
   delay(250);
@@ -118,12 +124,13 @@ void loop()
         set_color();
         break;
       case 2: //Pulse purple LED
-        pulse_purple();
+        flash_rgb();
         break;
       case 3: //Off mode
         digitalWrite(redPin, LOW);
         digitalWrite(bluPin, LOW);
         digitalWrite(grnPin, LOW);
+        delay(250);
         break;
       case 4:
         mode = 1;
@@ -149,11 +156,10 @@ float temp_read (void) {
 
 void set_color (void) {
   
-  int sp = 20;
-  int duty = 250;
+  int sp = 15;
   
   // subtract the last reading:
-  total= total - readings[index]; 
+  total = total - readings[index]; 
   
   // read from the sensor:  
   readings[index] = analogRead(tmp36_Pin); 
@@ -172,9 +178,6 @@ void set_color (void) {
   // calculate the average:
   temperature = total / numReadings;     
   
-  //temperature = 0;
-  //temperature = analogRead(A1);
-  //delay(10);
   if (temperature < 103)
   {
     for(int fadeValue = 1; fadeValue < 254; fadeValue++) { 
@@ -193,19 +196,6 @@ void set_color (void) {
   {
     g = map(temperature, 103, 157, 1, 254);
     b = map(temperature, 103, 157, 254, 1);
-    /*
-    for(int fadeValue = 1; fadeValue < 254; fadeValue++) { 
-    softPWM(bluPin, (fadeValue-b), sp);
-    softPWM(grnPin, (fadeValue-g), sp);
-    digitalWrite(redPin, LOW);
-    }
-    
-    for(int fadeValue = 253; fadeValue > 1; fadeValue--) { 
-    softPWM(bluPin, (fadeValue-b), sp);
-    softPWM(grnPin, (fadeValue-g), sp);
-    softPWM(redPin, 1, sp);
-    }
-    */
     softPWM(grnPin, g, sp);
     softPWM(bluPin, b, sp);
     digitalWrite(redPin, LOW);
@@ -216,19 +206,6 @@ void set_color (void) {
   {
     r = map(temperature, 158, 179, 1, 254);
     g = map(temperature, 158, 179, 254, 1);
-    /*
-    for(int fadeValue = 1; fadeValue < 254; fadeValue++) { 
-    softPWM(bluPin, (fadeValue-b), sp);
-    softPWM(grnPin, (fadeValue-g), sp);
-    digitalWrite(redPin, LOW);
-    }
-    
-    for(int fadeValue = 253; fadeValue > 1; fadeValue--) { 
-    softPWM(bluPin, (fadeValue-b), sp);
-    softPWM(grnPin, (fadeValue-g), sp);
-    softPWM(redPin, 1, sp);
-    }
-    */
     softPWM(grnPin, g, sp);
     softPWM(redPin, r, sp);
     digitalWrite(bluPin, LOW);
@@ -249,6 +226,25 @@ void set_color (void) {
     digitalWrite(bluPin, LOW);
     }
   }
+}
+
+void flash_rgb(void) {
+  digitalWrite(grnPin, HIGH);     
+  delay(250);
+  digitalWrite(grnPin, LOW);
+  delay(250);
+  digitalWrite(bluPin, HIGH);     
+  delay(250);
+  digitalWrite(bluPin, LOW);
+  delay(250);
+  digitalWrite(redPin, HIGH);     
+  delay(250);
+  digitalWrite(redPin, LOW);
+  delay(250);
+  digitalWrite(redPin, LOW);
+  digitalWrite(bluPin, LOW);
+  digitalWrite(grnPin, LOW);
+  delay(250);
 }
 
 void pulse_purple(void) {
@@ -272,7 +268,14 @@ void pulse_purple(void) {
   }
 }
 
-// software PWM function that fakes analog output
+//Switch ISR Routine
+void SWITCH_ISR(){
+   mode++;
+   delay(100);
+  
+}
+
+//software PWM function that fakes analog output
 // Function reads in the pin,  duty cycle (brightness), and fade speed)
 // Duty cycle is 1-254
 void softPWM(int pin, int freq, int sp) {
