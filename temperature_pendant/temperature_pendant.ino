@@ -86,7 +86,7 @@ void setup()
 
 // Configures the Switch and TMP36 sensor pins
   pinMode(SW_Pin, INPUT);
-  //digitalWrite(SW_Pin, LOW);
+  digitalWrite(SW_Pin, LOW);
   pinMode(tmp36_Pin, INPUT);
   
 //Setup interrupt for switching modes
@@ -137,7 +137,10 @@ void loop()
       case 4: //Off mode
         pulse_red();
         break;
-      case 5:
+      case 5: //Off mode
+        pulse_white();
+        break;
+      case 6:
         digitalWrite(redPin, LOW);
         digitalWrite(bluPin, LOW);
         digitalWrite(grnPin, LOW);
@@ -282,6 +285,27 @@ void pulse_purple(void) {
   for(int fadeValue = 254; fadeValue > 1; fadeValue--) { 
     // sets the value (range from 0 to 255):
     digitalWrite(grnPin, LOW);
+    softPWM(redPin, fadeValue, fadeSpeed);
+    softPWM(bluPin, fadeValue, fadeSpeed);                        
+  }
+}
+
+void pulse_white(void) {
+  int fadeValue = 0;
+  
+  // fade in from min to max in increments of 5 points:
+  for(int fadeValue = 1; fadeValue < 254; fadeValue++) { 
+    // sets the value (range from 0 to 255):
+    softPWM(grnPin, fadeValue, fadeSpeed);
+    softPWM(redPin, fadeValue, fadeSpeed);
+    softPWM(bluPin, fadeValue, fadeSpeed);
+                         
+  } 
+
+  // fade out from max to min in increments of 5 points:
+  for(int fadeValue = 254; fadeValue > 1; fadeValue--) { 
+    // sets the value (range from 0 to 255):
+    softPWM(grnPin, fadeValue, fadeSpeed);
     softPWM(redPin, fadeValue, fadeSpeed);
     softPWM(bluPin, fadeValue, fadeSpeed);                        
   }

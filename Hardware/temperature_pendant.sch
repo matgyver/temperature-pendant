@@ -37,7 +37,7 @@ $Descr A4 11693 8268
 encoding utf-8
 Sheet 1 1
 Title "Temperature Pendant"
-Date "26 oct 2013"
+Date "7 dec 2013"
 Rev "1"
 Comp "Matthew E. Nelson"
 Comment1 "mnelson@aerodynelabs.com"
@@ -257,6 +257,33 @@ F 1 "GND" H 5000 4630 30  0001 C CNN
 F 2 "" H 5000 4700 60  0000 C CNN
 F 3 "" H 5000 4700 60  0000 C CNN
 	1    5000 4700
+	1    0    0    -1  
+$EndComp
+$Comp
+L R R?
+U 1 1 52A2BDC6
+P 6150 4150
+F 0 "R?" V 6230 4150 40  0000 C CNN
+F 1 "10k" V 6157 4151 40  0000 C CNN
+F 2 "~" V 6080 4150 30  0000 C CNN
+F 3 "~" H 6150 4150 30  0000 C CNN
+	1    6150 4150
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6150 3900 6150 3800
+Connection ~ 6150 3800
+Wire Wire Line
+	6150 4400 6150 4550
+$Comp
+L GND #PWR?
+U 1 1 52A2BE02
+P 6150 4550
+F 0 "#PWR?" H 6150 4550 30  0001 C CNN
+F 1 "GND" H 6150 4480 30  0001 C CNN
+F 2 "" H 6150 4550 60  0000 C CNN
+F 3 "" H 6150 4550 60  0000 C CNN
+	1    6150 4550
 	1    0    0    -1  
 $EndComp
 $EndSCHEMATC
