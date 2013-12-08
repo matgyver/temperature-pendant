@@ -37,7 +37,7 @@ $Descr A4 11693 8268
 encoding utf-8
 Sheet 1 1
 Title "Temperature Pendant"
-Date "7 dec 2013"
+Date "8 dec 2013"
 Rev "1"
 Comp "Matthew E. Nelson"
 Comment1 "mnelson@aerodynelabs.com"
@@ -286,4 +286,52 @@ F 3 "" H 6150 4550 60  0000 C CNN
 	1    6150 4550
 	1    0    0    -1  
 $EndComp
+$Comp
+L C C?
+U 1 1 52A4A502
+P 8400 3000
+F 0 "C?" H 8400 3100 40  0000 L CNN
+F 1 ".1 uF" H 8406 2915 40  0000 L CNN
+F 2 "~" H 8438 2850 30  0000 C CNN
+F 3 "~" H 8400 3000 60  0000 C CNN
+	1    8400 3000
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	8200 3000 7900 3000
+Connection ~ 7900 3000
+Wire Wire Line
+	8600 3000 8900 3000
+$Comp
+L GND #PWR?
+U 1 1 52A4A54D
+P 8900 3000
+F 0 "#PWR?" H 8900 3000 30  0001 C CNN
+F 1 "GND" H 8900 2930 30  0001 C CNN
+F 2 "" H 8900 3000 60  0000 C CNN
+F 3 "" H 8900 3000 60  0000 C CNN
+	1    8900 3000
+	0    -1   -1   0   
+$EndComp
+$Comp
+L C C?
+U 1 1 52A4B732
+P 3400 3200
+F 0 "C?" H 3400 3300 40  0000 L CNN
+F 1 ".1 uF" H 3406 3115 40  0000 L CNN
+F 2 "~" H 3438 3050 30  0000 C CNN
+F 3 "~" H 3400 3200 60  0000 C CNN
+	1    3400 3200
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3400 3000 3400 2850
+Wire Wire Line
+	3400 2850 4000 2850
+Connection ~ 4000 2850
+Wire Wire Line
+	3400 3400 3400 3550
+Wire Wire Line
+	3400 3550 4000 3550
+Connection ~ 4000 3550
 $EndSCHEMATC

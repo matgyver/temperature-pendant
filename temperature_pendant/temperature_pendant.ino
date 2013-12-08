@@ -32,6 +32,12 @@ here:  http://hlt.media.mit.edu/?p=1695.  There is a known issue with the Arduin
 this issue, see this:  https://github.com/TCWORLD/ATTinyCore/tree/master/PCREL%20Patch%20for%20GCC.  Basically there is a problem with the version
 of the compilier that Arduino uses, so this patch will fix that bug that limits it from compiling for programs larger than 4KB.  
 
+UPDATE!
+Through this process I ended up switching cores.  This was mainly due to the addition of using an ISR.  You can find the core I used here https://code.google.com/p/arduino-tiny/
+
+Another note on the ISR.  The ISR does indeed work, however since the softwarePWM also uses that timer, it has to finish that before it goes to the ISR.  The result is that if
+you push the button and it is pulsing a color, it will not move to the next mode until the the fade is complete.  Remember, it's a "feature".
+
 */
 
 /*
@@ -40,7 +46,6 @@ http://arduino.cc/forum/index.php/topic,75334.0.html
 
 All credit goes to him for the handy routine
 */
-
 
 #include "PinChangeInterrupt.h"
 // BlinkM / BlinkM MinM pins
@@ -56,6 +61,8 @@ volatile long lastDebounceTime = 0;   // the last time the interrupt was trigger
 #define fadeSpeed 15             //Defines how fast we fade in the SoftPWM routine
 #define debounceDelay 50    // the debounce time in ms; decrease if quick button presses are ignored, increase
                              //if you get noise (multipule button clicks detected by the code when you only pressed it once)
+
+#define INTERNAL2V56_NO_CAP (6)
 //Variable setup and initialize
 int SW_Pin = sdaPin;             //Digital in pin for reading switch
 const int tmp36_Pin  = A1;       //Analog in pin for TMP36 temp sensor and A1 because Arduino is stupid
@@ -88,6 +95,9 @@ void setup()
   pinMode(SW_Pin, INPUT);
   digitalWrite(SW_Pin, LOW);
   pinMode(tmp36_Pin, INPUT);
+  
+//Turn on the internal voltage reference for ADC since our source varies, uses the ATTiny 2.56 internal ref.
+  analogReference(INTERNAL2V56_NO_CAP);  
   
 //Setup interrupt for switching modes
   attachPcInterrupt(0,SWITCH_ISR,RISING);
@@ -126,7 +136,7 @@ void loop()
     
     switch (mode) {
       case 1:  //Set LED color based on temp, default mode
-        set_color();
+        set_color_by_temp();
         break;
       case 2: //Rotate flashing each pin on the RGB
         flash_rgb();
@@ -165,25 +175,26 @@ void SWITCH_ISR(){
 
 }
 
-float temp_read (void) {
-  float tmp36;
-  int raw_temp;
-  raw_temp = analogRead(tmp36_Pin);
-  float voltage = raw_temp * 3.7;
-  voltage /= 1024.0;
-  tmp36 = (voltage - 0.5) * 100;
-  return tmp36;
-}
-
-void set_color (void) {
+void set_color_by_temp (void) {
   
   int sp = 15;
+
+  //int temperature = temp_read();
+  int sensorValue = analogRead(tmp36_Pin);
+  int temperature = sensorValue * 2.56; 
   
+/* Average routine
+   In order to help smooth out the readings, we will take several measurements
+   and average them out.  This does mean that upon initial startup, it will start
+   at zero and pulse blue.  Once enough readings have been taken it will go to the 
+   right color
+   */
+   
   // subtract the last reading:
   total = total - readings[index]; 
   
   // read from the sensor:  
-  readings[index] = analogRead(tmp36_Pin); 
+  readings[index] = temperature; 
   
   // add the reading to the total:
   total = total + readings[index];       
@@ -197,9 +208,14 @@ void set_color (void) {
     index = 0;                           
 
   // calculate the average:
-  temperature = total / numReadings;     
+  temperature = total / numReadings;
   
-  if (temperature < 95)
+  //Here we determine the color base on the readings in millivolts.  This was done as doing
+  //a full conversion to temp was causing some issues.  We are not sending out the temp data
+  //So there is no need for this, this however keeps it fairly simple
+  
+  //If less than 0 C, pulse blue
+  if (temperature < 500)
   {
     for(int fadeValue = 1; fadeValue < 254; fadeValue++) { 
     softPWM(bluPin, fadeValue, sp);
@@ -213,36 +229,38 @@ void set_color (void) {
     digitalWrite(redPin, LOW);
     }
   }
-  else if(temperature < 158 && temperature >= 95)
+  //If between 0 and 25 C, fade from blue to green
+  else if(temperature < 750 && temperature >= 500)
   {
-    g = map(temperature, 103, 157, 1, 254);
-    b = map(temperature, 103, 157, 254, 1);
+    g = map(temperature, 500, 750, 1, 254);
+    b = map(temperature, 500, 750, 254, 1);
     softPWM(grnPin, g, sp);
     softPWM(bluPin, b, sp);
     digitalWrite(redPin, LOW);
     
   }
-  
-  else if(temperature < 180 && temperature >= 158)
+  //If between 25 and 50 C, fade from green to red
+  else if(temperature < 950 && temperature >= 750)
   {
-    r = map(temperature, 158, 179, 1, 254);
-    g = map(temperature, 158, 179, 254, 1);
+    r = map(temperature, 750, 950, 1, 254);
+    g = map(temperature, 750, 950, 254, 1);
     softPWM(grnPin, g, sp);
     softPWM(redPin, r, sp);
     digitalWrite(bluPin, LOW);
     
   }
   
-  else if (temperature >= 180)
+  //If the temperature is hot, over 50 C, pulse red quickly
+  else if (temperature >= 950)
   {
     for(int fadeValue = 1; fadeValue < 254; fadeValue++) { 
-    softPWM(redPin, fadeValue, sp);
+    softPWM(redPin, fadeValue, 5);
     digitalWrite(grnPin, LOW);
     digitalWrite(bluPin, LOW);
     }
     
     for(int fadeValue = 253; fadeValue > 1; fadeValue--) { 
-    softPWM(redPin, fadeValue, sp);
+    softPWM(redPin, fadeValue, 5);
     digitalWrite(grnPin, LOW);
     digitalWrite(bluPin, LOW);
     }
