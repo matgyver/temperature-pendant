@@ -38,9 +38,6 @@ Through this process I ended up switching cores.  This was mainly due to the add
 Another note on the ISR.  The ISR does indeed work, however since the softwarePWM also uses that timer, it has to finish that before it goes to the ISR.  The result is that if
 you push the button and it is pulsing a color, it will not move to the next mode until the the fade is complete.  Remember, it's a "feature".
 
-*/
-
-/*
 The Software PWM routine was original written by Ernst Christensen and was found in the following Arduino forum thread: 
 http://arduino.cc/forum/index.php/topic,75334.0.html
 
@@ -48,7 +45,7 @@ All credit goes to him for the handy routine
 */
 
 #include "PinChangeInterrupt.h"
-// BlinkM / BlinkM MinM pins
+// BlinkM / MinM pins
 const int redPin = 3;  // 
 const int grnPin = 4;  //
 const int bluPin = 1;  // PWM, will blink when programming
@@ -59,44 +56,49 @@ volatile long lastDebounceTime = 0;   // the last time the interrupt was trigger
 
 //Defines
 #define fadeSpeed 15             //Defines how fast we fade in the SoftPWM routine
-#define debounceDelay 50    // the debounce time in ms; decrease if quick button presses are ignored, increase
-                             //if you get noise (multipule button clicks detected by the code when you only pressed it once)
 
+//the debounce time in ms; decrease if quick button presses are ignored, increase
+//if you get noise (multipule button clicks detected by the code when you only pressed it once)
+#define debounceDelay 50         
+
+//Defines the 2.56V internal voltage reference for use in the analogReference function
 #define INTERNAL2V56_NO_CAP (6)
+
 //Variable setup and initialize
 int SW_Pin = sdaPin;             //Digital in pin for reading switch
 const int tmp36_Pin  = A1;       //Analog in pin for TMP36 temp sensor and A1 because Arduino is stupid
 const int numReadings = 10;      //Number of readings to take to average out the values
 
+//Setup variables and set default values
 int temperature = 0;
-int SW_Status;
 int mode = 1;
 
+//Array used for averaging temperature values
 int readings[numReadings];
 int index = 0;
 int total = 0;
 int average = 0;
-
+//Set RGB values to zero
 int r,g,b = 0;
 
 //  Setup routine, configures our pins and initializes a few things
 void setup() 
 {
+  
+  // initialize all the readings and array to 0 
+  for (int thisReading = 0; thisReading < numReadings; thisReading++)
+    readings[thisReading] = 0;   
   //configures the pins to the BlinkM module
   pinMode(redPin, OUTPUT);
   pinMode(grnPin, OUTPUT);
-  pinMode(bluPin, OUTPUT);
-
-  // initialize all the readings to 0: 
-  for (int thisReading = 0; thisReading < numReadings; thisReading++)
-    readings[thisReading] = 0;   
+  pinMode(bluPin, OUTPUT); 
 
 // Configures the Switch and TMP36 sensor pins
   pinMode(SW_Pin, INPUT);
   digitalWrite(SW_Pin, LOW);
   pinMode(tmp36_Pin, INPUT);
   
-//Turn on the internal voltage reference for ADC since our source varies, uses the ATTiny 2.56 internal ref.
+//Turn on the internal voltage reference for ADC since our source voltage varies, uses the ATTiny 2.56V internal ref.
   analogReference(INTERNAL2V56_NO_CAP);  
   
 //Setup interrupt for switching modes
@@ -141,16 +143,16 @@ void loop()
       case 2: //Rotate flashing each pin on the RGB
         flash_rgb();
         break;
-      case 3: //Off mode
+      case 3: //Pulse a purple color
         pulse_purple();
         break;
-      case 4: //Off mode
+      case 4: //Pulse a red color
         pulse_red();
         break;
-      case 5: //Off mode
+      case 5: //Pulse a white color
         pulse_white();
         break;
-      case 6:
+      case 6: //"Off" mode, not a true off, but we are not burning current in the LEDs
         digitalWrite(redPin, LOW);
         digitalWrite(bluPin, LOW);
         digitalWrite(grnPin, LOW);
@@ -163,7 +165,13 @@ void loop()
 
 }
 
-//Switch ISR Routine
+/* Switch ISR Routine
+This routine handles the switch and debounce.  If the switch is pressed, we want to increment the mode
+We also want to handle a debounce on the switch, so we use the millis function to count so much before
+actually acting on the switch, if the switch is still pressed, we increment
+Because of the millis function, this ISR can not happen right away when the LEDs are using the Software PWM
+So there will be a delay during these times until the fade is complete.  Consider this a "feature"
+*/
 void SWITCH_ISR(){
   
   if ((millis() - lastDebounceTime) > debounceDelay) //if current time minus the last trigger time is greater than
@@ -175,11 +183,9 @@ void SWITCH_ISR(){
 
 }
 
+//This function reads the temp sensor and then sets the color of the RGB based on that value
 void set_color_by_temp (void) {
-  
-  int sp = 15;
 
-  //int temperature = temp_read();
   int sensorValue = analogRead(tmp36_Pin);
   int temperature = sensorValue * 2.56; 
   
@@ -211,20 +217,20 @@ void set_color_by_temp (void) {
   temperature = total / numReadings;
   
   //Here we determine the color base on the readings in millivolts.  This was done as doing
-  //a full conversion to temp was causing some issues.  We are not sending out the temp data
-  //So there is no need for this, this however keeps it fairly simple
+  //a full conversion to a temperature was causing some issues.  We are not sending out the temp data
+  //so there is no need for this, but using the millivolts value does keep it fairly easy to read
   
   //If less than 0 C, pulse blue
   if (temperature < 500)
   {
     for(int fadeValue = 1; fadeValue < 254; fadeValue++) { 
-    softPWM(bluPin, fadeValue, sp);
+    softPWM(bluPin, fadeValue, fadeSpeed);
     digitalWrite(grnPin, LOW);
     digitalWrite(redPin, LOW);
     }
     
     for(int fadeValue = 253; fadeValue > 1; fadeValue--) { 
-    softPWM(bluPin, fadeValue, sp);
+    softPWM(bluPin, fadeValue, fadeSpeed);
     digitalWrite(grnPin, LOW);
     digitalWrite(redPin, LOW);
     }
@@ -234,8 +240,8 @@ void set_color_by_temp (void) {
   {
     g = map(temperature, 500, 750, 1, 254);
     b = map(temperature, 500, 750, 254, 1);
-    softPWM(grnPin, g, sp);
-    softPWM(bluPin, b, sp);
+    softPWM(grnPin, g, fadeSpeed);
+    softPWM(bluPin, b, fadeSpeed);
     digitalWrite(redPin, LOW);
     
   }
@@ -244,8 +250,8 @@ void set_color_by_temp (void) {
   {
     r = map(temperature, 750, 950, 1, 254);
     g = map(temperature, 750, 950, 254, 1);
-    softPWM(grnPin, g, sp);
-    softPWM(redPin, r, sp);
+    softPWM(grnPin, g, fadeSpeed);
+    softPWM(redPin, r, fadeSpeed);
     digitalWrite(bluPin, LOW);
     
   }
@@ -267,24 +273,32 @@ void set_color_by_temp (void) {
   }
 }
 
-//A simple routine that rotates from flashing each color
+//This routine flashes each RGB LED in sequence and the speed depends on the temperature value
 void flash_rgb(void) {
+  
+  //Read the sensor, convert to milliVolt
+  int sensorValue = analogRead(tmp36_Pin);
+  int temperature = sensorValue * 2.56; 
+  
+  //Map the millis to a range of delay values
+  int sp = map(temperature, 500, 950, 350, 100);
+  
   digitalWrite(grnPin, HIGH);     
-  delay(150);
+  delay(sp);
   digitalWrite(grnPin, LOW);
-  delay(150);
+  delay(sp);
   digitalWrite(bluPin, HIGH);     
-  delay(150);
+  delay(sp);
   digitalWrite(bluPin, LOW);
-  delay(150);
+  delay(sp);
   digitalWrite(redPin, HIGH);     
-  delay(150);
+  delay(sp);
   digitalWrite(redPin, LOW);
-  delay(150);
+  delay(sp);
   digitalWrite(redPin, LOW);
   digitalWrite(bluPin, LOW);
   digitalWrite(grnPin, LOW);
-  delay(150);
+  delay(sp);
 }
 
 void pulse_purple(void) {
