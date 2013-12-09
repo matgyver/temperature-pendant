@@ -1,4 +1,4 @@
-Cmp-Mod V01 Created by CvPcb (2013-07-07 BZR 4022)-stable date = 11/16/2013 6:59:06 PM
+Cmp-Mod V01 Created by CvPcb (2013-07-07 BZR 4022)-stable date = 12/9/2013 12:13:44 AM
 
 BeginCmp
 TimeStamp = /5264A202;
@@ -8,10 +8,31 @@ IdModule  = CONN-JST-XH-2;
 EndCmp
 
 BeginCmp
+TimeStamp = /52A4B732;
+Reference = C1;
+ValeurCmp = .1 uF;
+IdModule  = SM0603;
+EndCmp
+
+BeginCmp
+TimeStamp = /52A4A502;
+Reference = C2;
+ValeurCmp = .1 uF;
+IdModule  = SM0603;
+EndCmp
+
+BeginCmp
 TimeStamp = /5265F63E;
 Reference = J1;
 ValeurCmp = CONN-6;
 IdModule  = HDRV5W38P254_6X1-LOCK;
+EndCmp
+
+BeginCmp
+TimeStamp = /52A2BDC6;
+Reference = R1;
+ValeurCmp = 10k;
+IdModule  = SM0603;
 EndCmp
 
 BeginCmp
