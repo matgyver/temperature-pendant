@@ -1,10 +1,10 @@
-Cmp-Mod V01 Created by CvPcb (2013-07-07 BZR 4022)-stable date = 1/11/2014 4:03:19 PM
+Cmp-Mod V01 Created by CvPcb (2013-07-07 BZR 4022)-stable date = 1/11/2014 5:04:51 PM
 
 BeginCmp
 TimeStamp = /5264A202;
 Reference = BT1;
 ValeurCmp = BATTERY;
-IdModule  = CONN-JST-XH-2;
+IdModule  = CONN-JST-PH-2V;
 EndCmp
 
 BeginCmp
@@ -46,7 +46,7 @@ BeginCmp
 TimeStamp = /52D1B0CB;
 Reference = J2;
 ValeurCmp = USB_MINI;
-IdModule  = USB_MINI_B;
+IdModule  = USB_MICRO_B;
 EndCmp
 
 BeginCmp
