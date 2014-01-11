@@ -1,4 +1,4 @@
-Cmp-Mod V01 Created by CvPcb (2013-07-07 BZR 4022)-stable date = 12/9/2013 12:13:44 AM
+Cmp-Mod V01 Created by CvPcb (2013-07-07 BZR 4022)-stable date = 1/11/2014 4:03:19 PM
 
 BeginCmp
 TimeStamp = /5264A202;
@@ -15,10 +15,24 @@ IdModule  = SM0603;
 EndCmp
 
 BeginCmp
-TimeStamp = /52A4A502;
+TimeStamp = /52D1B3B5;
 Reference = C2;
+ValeurCmp = 4.7uF;
+IdModule  = SM0603;
+EndCmp
+
+BeginCmp
+TimeStamp = /52A4A502;
+Reference = C3;
 ValeurCmp = .1 uF;
 IdModule  = SM0603;
+EndCmp
+
+BeginCmp
+TimeStamp = /52D1B183;
+Reference = D1;
+ValeurCmp = LED;
+IdModule  = LED-0603;
 EndCmp
 
 BeginCmp
@@ -29,8 +43,29 @@ IdModule  = HDRV5W38P254_6X1-LOCK;
 EndCmp
 
 BeginCmp
-TimeStamp = /52A2BDC6;
+TimeStamp = /52D1B0CB;
+Reference = J2;
+ValeurCmp = USB_MINI;
+IdModule  = USB_MINI_B;
+EndCmp
+
+BeginCmp
+TimeStamp = /52D1B1B0;
 Reference = R1;
+ValeurCmp = 330;
+IdModule  = SM0603;
+EndCmp
+
+BeginCmp
+TimeStamp = /52D1B240;
+Reference = R2;
+ValeurCmp = 2K;
+IdModule  = SM0603;
+EndCmp
+
+BeginCmp
+TimeStamp = /52A2BDC6;
+Reference = R3;
 ValeurCmp = 10k;
 IdModule  = SM0603;
 EndCmp
@@ -43,15 +78,22 @@ IdModule  = SW-EVQP7;
 EndCmp
 
 BeginCmp
-TimeStamp = /5265EB43;
+TimeStamp = /52D1B0BC;
 Reference = U1;
+ValeurCmp = MCP73831/2;
+IdModule  = SOT23-5;
+EndCmp
+
+BeginCmp
+TimeStamp = /5265EB43;
+Reference = U2;
 ValeurCmp = BLINKM/MINM;
 IdModule  = BlinkM;
 EndCmp
 
 BeginCmp
 TimeStamp = /5264B6FD;
-Reference = U2;
+Reference = U3;
 ValeurCmp = TMP3X;
 IdModule  = TO92-INVERT;
 EndCmp
