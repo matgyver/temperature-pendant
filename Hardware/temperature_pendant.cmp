@@ -1,4 +1,4 @@
-Cmp-Mod V01 Created by CvPcb (2013-07-07 BZR 4022)-stable date = 1/11/2014 5:04:51 PM
+Cmp-Mod V01 Created by CvPcb (2013-07-07 BZR 4022)-stable date = 1/11/2014 5:17:16 PM
 
 BeginCmp
 TimeStamp = /5264A202;
@@ -88,7 +88,7 @@ BeginCmp
 TimeStamp = /5265EB43;
 Reference = U2;
 ValeurCmp = BLINKM/MINM;
-IdModule  = BlinkM;
+IdModule  = MinM;
 EndCmp
 
 BeginCmp
